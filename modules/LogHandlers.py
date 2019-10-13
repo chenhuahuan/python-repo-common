@@ -75,6 +75,7 @@ class STDLogHandler(logging.Handler):
         In this case it will first print it to stdout if the level is below
         ERROR or stderr for ERROR and above.
         '''
+
         # This checks for level equal or above ERROR and prints to stderr,
         # stdout otherwise
         header = self.create_general_header(record.levelno, record)
@@ -92,8 +93,6 @@ class STDLogHandler(logging.Handler):
 
             for line in lines:
                 print(header, line, file=sys.stdout, flush=True)
-
-
 
 
 class ErrorLogHandler(STDLogHandler):
@@ -172,7 +171,7 @@ class TestLogHandler(STDLogHandler):
             # After the first pass, switch to the sparse header
 
 
-def hook_logging():
+def hook_logging(std_level=logging.INFO, testlog_level=logging.DEBUG, error_level=logging.ERROR):
     _logger = logging.getLogger()
 
     # Need to remove any handlers that got auto-added
@@ -180,7 +179,7 @@ def hook_logging():
         _logger.removeHandler(handler)
 
     # Always add the STD loggers
-    _logger.addHandler(STDLogHandler(cwd='.'))
+    _logger.addHandler(STDLogHandler(cwd='.', level=std_level))
     _logger.addHandler(ErrorLogHandler(cwd='.'))
     _logger.addHandler(TestLogHandler(cwd='.'))
 
@@ -193,3 +192,4 @@ if __name__ == "__main__":
     logger = logging.getLogger(__name__)
 
     logger.info('aaxxxxxxa')
+    sys.exit(-1)
