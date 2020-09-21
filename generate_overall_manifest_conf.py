@@ -42,7 +42,7 @@ def generate_overall_manifest_conf(src_file_list, dest_file="overall.conf"):
             for branch in branch_list:
                 str_concat += "p={}\n".format(project)
                 str_concat += "b={}\n".format(branch)
-                str_concat += "t~=.*[^\s]\n"
+                str_concat += "t~.*[^\s]\n"
         fp.write(str_concat)
 
     print(str_concat)
