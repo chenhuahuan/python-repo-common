@@ -1,0 +1,5 @@
+
+- project: perception/script
+  branch: develop
+- project: ss_util
+  branch: develop

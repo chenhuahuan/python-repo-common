@@ -1,0 +1,6 @@
+
+
+- !include common/dynamic/develop/trigger.yaml
+- !include application/wm260/non_trunk_trigger.yaml
+
+
